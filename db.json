@@ -1,0 +1,39 @@
+{
+  "todos": [
+    {
+      "id": "25079db6-fa20-40ce-b5a4-fe4412409e92",
+      "completed": false,
+      "name": "PLAY FIFA WITH THE GUYS"
+    },
+    {
+      "id": "d06bd987-c91a-41f9-b7e3-bcbcabc474cb",
+      "completed": false,
+      "name": "LEARN THE ALPHABET"
+    },
+    {
+      "id": "7e573c58-ad26-46cd-bc62-50f80fd6ef4e",
+      "completed": false,
+      "name": "BUY A PYTHON"
+    },
+    {
+      "id": "c02eb5a5-1c75-4612-ab5d-143db819b6e0",
+      "completed": false,
+      "name": "TEACH CODE"
+    },
+    {
+      "id": "f640b292-ee88-4b29-973d-2d4673baeab1",
+      "completed": false,
+      "name": "LIVE LIFE"
+    },
+    {
+      "id": "4787d7ff-b79e-426a-96a5-7e1116cd716c",
+      "completed": false,
+      "name": "PLAY ZELDA"
+    },
+    {
+      "id": "d1ca9c33-dbe8-41dc-9df2-5cffce261477",
+      "completed": false,
+      "name": "BREAK A LEG"
+    }
+  ]
+}
