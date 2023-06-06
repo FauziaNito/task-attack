@@ -8,6 +8,7 @@ import {
   Input,
   List,
   ListItem,
+  Spinner,
   Text,
 } from '@chakra-ui/react';
 import * as uuid from 'uuid';
@@ -105,7 +106,7 @@ function App() {
               _active={{ bg: 'yellow.400' }}
               isDisabled={addTodoMutation.isLoading}
             >
-              +
+              {addTodoMutation.isLoading ? <Spinner size='sm' /> : '+'}
             </Button>
           </form>
           <List fontSize={20}>
@@ -127,7 +128,12 @@ function App() {
                     borderColor="gray.400"
                     onClick={() => handleDelete(todo.id)}
                   >
-                    DELETE TASK
+                    {deleteTodoMutation.variables === todo.id ? (
+                      <Spinner />
+                    ) : (
+                      'DELETE TASK'
+                    )}
+                    {/* DELETE TASK */}
                   </Button>
                 </Flex>
               </ListItem>
