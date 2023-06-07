@@ -20,35 +20,40 @@ import todoApi from '../../api/todoApi';
 
 
 function App() {
-  const [taskName, setTaskName] = useState('');
-  const [todos, setTodos] = useState([]);
-  const [taskNameError, setTaskNameError] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isDeleting, setIsDeleting] = useState(null);
-  const [isLoadingTodos, setIsLoadingTodos] = useState(false);
-  const [isFirstLoad, setIsFirstLoad] = useState(true);
+  const [taskName, setTaskName] = useState(''); // for tracking value in input field
+  const [todos, setTodos] = useState([]); // for tracking list of todos displayed to user
+  const [taskNameError, setTaskNameError] = useState(''); // for form errors
+  const [isSubmitting, setIsSubmitting] = useState(false); // for tracking when form submission is in progress
+  const [isDeleting, setIsDeleting] = useState(null); // for tracking when deleting is in progress
+  const [isLoadingTodos, setIsLoadingTodos] = useState(false); // for tracking when loading todos is in progress
+  const [isFirstLoad, setIsFirstLoad] = useState(true); // for tracking when we are loading data for the first time
 
+  
   const fetchAllTodos = async () => {
-    setIsLoadingTodos(true);
+    setIsLoadingTodos(true); // signal that loading todos is in progress
     try {
       const { data: todos } = await todoApi.get('/todos');
       setTodos(todos);
     } catch (error) {
       console.log(error);
     } finally {
-      setIsLoadingTodos(false);
+      setIsLoadingTodos(false); // signal that we are no longer loading todos
     }
   };
 
+  /**
+   * first time loading
+   */
   useEffect(() => {
     fetchAllTodos();
     setIsFirstLoad(false);
   }, []);
 
   const handleSubmit = async (event) => {
-    setIsSubmitting(true);
-    setTaskNameError('');
     event.preventDefault();
+
+    setIsSubmitting(true); // signal that the submission process has started
+    setTaskNameError(''); // clear any errors from before
 
     // validation
     if (taskName.trim().length === 0) {
@@ -62,8 +67,8 @@ function App() {
     try {
      await todoApi.post('/todos', data); // this [mutation] invalidates(makes stale) all previously requested data
       // setTodos([...todos, response.data]) // get back todo with id and add to todos array
-      await fetchAllTodos(); // refetch
-      setTaskName('');
+      await fetchAllTodos(); // refetch the latest data
+      setTaskName(''); // clear input
     } catch (error) {
       console.log(error);
     } finally {
@@ -112,10 +117,11 @@ function App() {
               p={7}
               placeholder="ENTER A TASK TO ATTACK"
               onChange={(event) => {
-                setTaskNameError('');
+                setTaskNameError(''); // clear input when user types
                 setTaskName(event.target.value.toUpperCase());
               }}
             />
+            {/* display error, if any */}
             {taskNameError && (
               <Box bg="red.400" color="white" p={1}>
                 {taskNameError}
